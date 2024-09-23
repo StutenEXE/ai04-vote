@@ -89,7 +89,6 @@ func TestApprovalSWF(t *testing.T) {
 	thresholds := []int{2, 1, 2}
 
 	res, _ := ApprovalSWF(prefs, thresholds)
-
 	if res[1] != 2 {
 		t.Errorf("error, result for 1 should be 2, %d computed", res[1])
 	}
@@ -168,21 +167,23 @@ func TestSWFFactory(t *testing.T) {
 		{1, 2, 3},
 		{2, 1, 3},
 		{2, 1, 3},
-		{3, 1, 2},
+		{2, 3, 1},
+		{1, 3, 1},
 		{3, 2, 1},
 	}
 
 	trieur := []Alternative{1, 3, 2}
 	tieBreak := TieBreakFactory(trieur)
 	fn := SWFFactory(MajoritySWF, tieBreak)
+	//t.Error(MajoritySWF(prefs))
 	res, err := fn(prefs)
 
 	if err != nil {
 		t.Error(err)
 	}
 
-	if len(res) != 3 || res[0] != 1 || res[1] != 3 || res[2] != 2 {
-		t.Errorf("error, 1 should be the only best Alternative")
+	if len(res) != 3 || res[0] != 1 || res[1] != 2 || res[2] != 3 {
+		t.Error(res)
 	}
 }
 

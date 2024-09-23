@@ -28,6 +28,9 @@ func SWFFactory(swf func(p Profile) (Count, error), tb func([]Alternative) (Alte
 			alts = append(alts, elem)
 		}
 		sort.Slice(alts, func(i, j int) bool {
+			if c[alts[i]] != c[alts[j]] {
+				return c[alts[i]] > c[alts[j]]
+			}
 			var array []Alternative
 			array = append(array, alts[i])
 			array = append(array, alts[j])
