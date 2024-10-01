@@ -182,12 +182,16 @@ func TestSWFFactory(t *testing.T) {
 		t.Error(err)
 	}
 
-	if len(res) != 3 || res[0] != 1 || res[1] != 2 || res[2] != 3 {
-		t.Error(res)
+	if len(res) != 1 {
+		t.Errorf("list should be of size 1, not %v", len(res))
+	}
+
+	if res[0] != 1 {
+		t.Errorf("the winner should be 1, not %v", res[0])
 	}
 }
 
-/* func TestCondorcetWinner(t *testing.T) {
+func TestCondorcetWinner(t *testing.T) {
 	prefs1 := [][]Alternative{
 		{1, 2, 3},
 		{1, 2, 3},
@@ -204,9 +208,9 @@ func TestSWFFactory(t *testing.T) {
 	res2, _ := CondorcetWinner(prefs2)
 
 	if len(res1) == 0 || res1[0] != 1 {
-		t.Errorf("error, 1 should be the only best alternative for prefs1")
+		t.Errorf("error, 1 should be the only best alternative for prefs1. Got %v", res1)
 	}
 	if len(res2) != 0 {
 		t.Errorf("no best alternative for prefs2")
 	}
-} */
+}

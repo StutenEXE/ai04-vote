@@ -46,7 +46,7 @@ func maxCount(count Count) (bestAlts []Alternative) {
 // vérifie les préférences d'un agent, par ex. qu'ils sont tous complets et que chaque alternative n'apparaît qu'une seule fois
 func checkProfile(prefs []Alternative, alts []Alternative) error {
 	if len(prefs) < len(alts) {
-		return errors.New("An alternative missing in profile\n")
+		return errors.New("an alternative missing in profile")
 	}
 
 	for _, alt := range alts {
@@ -58,7 +58,7 @@ func checkProfile(prefs []Alternative, alts []Alternative) error {
 			}
 		}
 		if !found {
-			return errors.New("An alternative is present multiple times in profile\n")
+			return errors.New("an alternative is present multiple times in profile")
 		}
 	}
 
@@ -69,7 +69,7 @@ func checkProfile(prefs []Alternative, alts []Alternative) error {
 func checkProfileAlternative(prefs Profile, alts []Alternative) error {
 	for i, profile := range prefs {
 		if err := checkProfile(profile, alts); err != nil {
-			return errors.New(fmt.Sprintf("Profile %v : %s", i, err.Error()))
+			return fmt.Errorf("profile %v : %s", i, err.Error())
 		}
 	}
 	return nil
@@ -81,7 +81,7 @@ func checkAlternativesUnicity(alts []Alternative) error {
 
 	for _, alt := range alts {
 		if altCounts[alt] > 1 {
-			return errors.New(fmt.Sprintf("The alternative %v is present twice in alternatives\n", alt))
+			return fmt.Errorf("the alternative %v is present twice in alternatives", alt)
 		}
 		altCounts[alt] = 1
 	}

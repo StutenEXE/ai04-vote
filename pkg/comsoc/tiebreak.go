@@ -14,7 +14,7 @@ func TieBreakFactory(orderedAlts []Alternative) func([]Alternative) (Alternative
 				}
 			}
 		}
-		return alts[0], errors.New("Erreur, pas de gagant dans la liste")
+		return alts[0], errors.New("erreur, pas de gagant dans la liste")
 	}
 }
 
@@ -24,20 +24,14 @@ func SWFFactory(swf func(p Profile) (Count, error), tb func([]Alternative) (Alte
 		if err != nil {
 			return
 		}
-		for elem, _ := range c {
+		for elem := range c {
 			alts = append(alts, elem)
 		}
 		sort.Slice(alts, func(i, j int) bool {
-			if c[alts[i]] != c[alts[j]] {
-				return c[alts[i]] > c[alts[j]]
-			}
-			var array []Alternative
-			array = append(array, alts[i])
-			array = append(array, alts[j])
-
-			winner, _ := tb(array)
-			return winner == array[0]
+			return c[alts[i]] >= c[alts[j]]
 		})
+		alt, err := tb(alts)
+		alts = []Alternative{alt}
 		return
 	}
 }

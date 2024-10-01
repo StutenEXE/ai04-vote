@@ -14,7 +14,7 @@ func ApprovalSWF(p Profile, thresholds []int) (count Count, err error) {
 	}
 
 	if len(p) != len(thresholds) {
-		err = errors.New("Error, not as much thersholds as voters\n")
+		err = errors.New("error, not as much thersholds as voters")
 	}
 	count = make(Count)
 	for index, nb := range thresholds {
