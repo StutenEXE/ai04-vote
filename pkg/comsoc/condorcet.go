@@ -1,5 +1,6 @@
 package comsoc
 
+// Permet de ne garder que les deux alternatives passées en paramètre dans le profil
 func keepOnlyTwoAlternatives(p Profile, alt1 Alternative, alt2 Alternative) (newProfile Profile) {
 	for i, alts := range p {
 		newProfile = append(newProfile, make([]Alternative, len(alts)))
